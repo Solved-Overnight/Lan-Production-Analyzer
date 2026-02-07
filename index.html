@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Dashboard | Lantabur & Taqwa</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%236366f1'/><path d='M35 70 V30 H48 V60 H70 V70 Z' fill='white'/><path d='M75 25 L85 25 L85 35 Z' fill='%23fbbf24'/></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+          font-family: 'Inter', sans-serif; 
+          background-color: var(--app-bg); 
+          color: var(--app-text);
+          transition: background-color 0.2s ease, color 0.2s ease;
+          margin: 0;
+          padding: 0;
+        }
+
+        :root {
+          /* Default Light Theme */
+          --app-bg: #f8fafc;
+          --app-card: #ffffff;
+          --app-text: #0f172a;
+          --app-text-muted: #64748b;
+          --app-border: #e2e8f0;
+          --app-accent: #6366f1;
+          --app-accent-hover: #4f46e5;
+          --app-accent-contrast: #ffffff;
+        }
+
+        [data-theme='dark'] {
+          --app-bg: #0f172a;
+          --app-card: #1e293b;
+          --app-text: #f1f5f9;
+          --app-text-muted: #94a3b8;
+          --app-border: #334155;
+        }
+
+        [data-theme='material'] {
+          --app-bg: #eceff1;
+          --app-card: #ffffff;
+          --app-text: #263238;
+          --app-text-muted: #607d8b;
+          --app-border: #cfd8dc;
+        }
+
+        [data-theme='tokio-night'] {
+          --app-bg: #1a1b26;
+          --app-card: #24283b;
+          --app-text: #a9b1d6;
+          --app-text-muted: #565f89;
+          --app-border: #414868;
+        }
+
+        [data-theme='monokai'] {
+          --app-bg: #272822;
+          --app-card: #3e3d32;
+          --app-text: #f8f8f2;
+          --app-text-muted: #75715e;
+          --app-border: #49483e;
+        }
+
+        [data-theme='dracula'] {
+          --app-bg: #282a36;
+          --app-card: #44475a;
+          --app-text: #f8f8f2;
+          --app-text-muted: #6272a4;
+          --app-border: #6272a4;
+        }
+
+        /* Support for sticky cell hover highlighting */
+        .table-row-hover:hover td {
+          background-color: color-mix(in srgb, var(--app-accent), transparent 90%) !important;
+          transition: background-color 0.15s ease;
+        }
+
+        /* Modal Backdrop Fix */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(var(--overlay-bg-rgb, 15, 23, 42), 0.6);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+        }
+
+        /* Professional Scrollbar Design */
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: var(--app-border);
+          border-radius: 20px;
+          border: 1px solid transparent;
+          background-clip: content-box;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--app-accent);
+          opacity: 0.7;
+        }
+
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: var(--app-border) transparent;
+        }
+    </style>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': 'var(--app-bg)',
+            'app-card': 'var(--app-card)',
+            'app-text': 'var(--app-text)',
+            'app-text-muted': 'var(--app-text-muted)',
+            'app-border': 'var(--app-border)',
+            'app-accent': 'var(--app-accent)',
+            'app-accent-hover': 'var(--app-accent-hover)',
+            'app-accent-contrast': 'var(--app-accent-contrast)',
+          }
+        }
+      }
+    }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+    "firebase/database": "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js",
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "jspdf": "https://esm.sh/jspdf@^2.5.1",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
